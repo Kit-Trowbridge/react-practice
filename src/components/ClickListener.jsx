@@ -10,4 +10,4 @@ const ClickListener = () => {
     )
 }
 
-export default ClickListener
+export default ClickListener;

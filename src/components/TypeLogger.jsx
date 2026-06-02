@@ -6,7 +6,7 @@ const TypeLogger = () => {
         }  
         console.log(inputText) 
     }
-
     return <input type="text" onChange={handleChange}/>
 }
+
 export default TypeLogger;
