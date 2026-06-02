@@ -3,8 +3,8 @@ const Profile = (props) => {
         <div id="profile">
             <h1 id="name">{props.name}</h1>
 
-            <p id="job">{props.job}</p>
-            <p id="birthdate">{props.birthdate}</p>
+            <p id="job" data-testid="job">{props.job}</p>
+            <p id="birthdate" data-testid="birthdate">{props.birthdate}</p>
         </div>
     )
 }
