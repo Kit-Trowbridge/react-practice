@@ -8,7 +8,11 @@ function App() {
     <>
       <Hello name="World" />
       <img className="logo" src={makersLogo}></img>
-      <Profile />
+      <Profile 
+        name="Quackie Makers"
+        job="Makers' favourite rubber duck"
+        birthdate="2013"
+      />
     </>
   );
 }
