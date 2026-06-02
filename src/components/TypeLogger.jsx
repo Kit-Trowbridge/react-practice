@@ -1,8 +1,10 @@
 const TypeLogger = () => {
     let inputText = ""
     const handleChange = (event) => {
-        inputText += event.nativeEvent.data
-        console.log(inputText)
+        if (event.nativeEvent.data !== null){
+            inputText += event.nativeEvent.data           
+        }  
+        console.log(inputText) 
     }
 
     return <input type="text" onChange={handleChange}/>
