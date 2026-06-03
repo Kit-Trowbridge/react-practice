@@ -21,6 +21,6 @@ test("renders decremented count of -1 when button is pressed once", async () => 
     render(<Counter />);
     await userEvent.click(screen.getByText("Decrement"));
 
-    expect(screen.getAllByRole("heading")).toHaveTextContent(-1);
+    expect(screen.getByRole("heading")).toHaveTextContent(-1);
 
 })

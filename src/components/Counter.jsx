@@ -5,13 +5,18 @@ const Counter = () => {
     const countIncrementer = () => {
         // countIncrementer doesn't need to return anything, it just calls setCount
         // useState is what returns the count value
-        setCount(count + 1)
+        setCount(count + 1);
+    }
+
+    const countDecrementer = () => {
+        setCount(count - 1);
     }
 
     return(
         <div>
             <h2>{count}</h2>
             <button onClick={countIncrementer}>Increment</button>
+            <button onClick={countDecrementer}>Decrement</button>
         </div>
     )
 };
