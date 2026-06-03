@@ -1,10 +1,8 @@
-import Hello from "./components/Hello";
 import Profile from "./components/Profile";
 import Product from "./components/Product";
 import TypeLogger from "./components/TypeLogger";
 import ClickListener from "./components/ClickListener";
 import Counter from "./components/Counter";
-import makersLogo from "./assets/Makers-Logo.png";
 import "./App.css";
 
 function App() {
