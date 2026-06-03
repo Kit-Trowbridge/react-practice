@@ -3,7 +3,9 @@ import { useState } from "react"
 const Counter = () => {
     const [count, setCount] = useState(0)
     const countIncrementer = () => {
-        return setCount(count + 1)
+        // countIncrementer doesn't need to return anything, it just calls setCount
+        // useState is what returns the count value
+        setCount(count + 1)
     }
 
     return(
