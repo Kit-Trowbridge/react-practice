@@ -10,9 +10,17 @@ test("renders with initial setup value of 0", () => {
 test("renders incremented count (3) when button is pressed three times", async () => {
     render(<Counter />);
 
-    await userEvent.click(screen.getByText("Increment the counter"));
-    await userEvent.click(screen.getByText("Increment the counter"));
-    await userEvent.click(screen.getByText("Increment the counter"));
+    await userEvent.click(screen.getByText("Increment"));
+    await userEvent.click(screen.getByText("Increment"));
+    await userEvent.click(screen.getByText("Increment"));
 
     expect(screen.getByRole("heading")).toHaveTextContent(3);
 });
+
+test("renders decremented count of -1 when button is pressed once", async () => {
+    render(<Counter />);
+    await userEvent.click(screen.getByText("Decrement"));
+
+    expect(screen.getAllByRole("heading")).toHaveTextContent(-1);
+
+})
