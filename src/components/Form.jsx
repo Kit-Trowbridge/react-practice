@@ -4,15 +4,22 @@ const Form = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleUsername = (event) => {
-        const inputEl = event.target;
-        setUsername(inputEl.value);
-    };
+    const handleInput = (event) => {
+        const inputEl = event.target
+        inputEl.name === "username" ? setUsername(inputEl.value) : setPassword(inputEl.value);
+    }
+
+    // const handleUsername = (event) => {
+    //     const inputEl = event.target;
+    //     console.log("username", inputEl);
+    //     setUsername(inputEl.value);
+    // };
     
-    const handlePassword = (event) => {
-        const inputEl = event.target;
-        setPassword(inputEl.value);
-    };
+    // const handlePassword = (event) => {
+    //     const inputEl = event.target;
+    //     console.log("password", inputEl)
+    //     setPassword(inputEl.value);
+    // };
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -35,7 +42,7 @@ const Form = () => {
                     type="text" 
                     name="username" 
                     value={username}
-                    onChange={handleUsername}
+                    onChange={handleInput}
                 />
             </label>
             <br />
@@ -45,7 +52,7 @@ const Form = () => {
                     type="password" 
                     name="password"
                     value={password}
-                    onChange={handlePassword}
+                    onChange={handleInput}
                 />
             </label>
             <br />
