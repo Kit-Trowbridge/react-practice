@@ -1,9 +1,6 @@
 import { useState } from "react"
 
 const Form = () => {
-    // const [username, setUsername] = useState("");
-    // const [password, setPassword] = useState("");
-
     const [loginInfo, setLoginInfo] = useState({username: "", password: ""});
 
     const handleInput = (event) => {
@@ -15,10 +12,7 @@ const Form = () => {
         event.preventDefault();
         fetch("http://url.com/endpoint", {
             method: "POST",
-            body: JSON.stringify({
-                username: loginInfo.username,
-                password: loginInfo.password
-            })
+            body: JSON.stringify(loginInfo)
         });
         setLoginInfo({username: "", password: ""})
     };
