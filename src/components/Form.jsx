@@ -1,19 +1,30 @@
 import { useState } from "react"
 
 const Form = () => {
-    const [username, setUsername] = useState("")
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
-    const handleChange = (event) => {
+    const handleUsername = (event) => {
         const inputEl = event.target;
         setUsername(inputEl.value);
+    };
+    
+    const handlePassword = (event) => {
+        const inputEl = event.target;
+        setPassword(inputEl.value);
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
         fetch("http://url.com/endpoint", {
             method: "POST",
-            body: JSON.stringify({username: username})
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
         });
+        setUsername("");
+        setPassword("");
     };
 
     return (
@@ -21,10 +32,20 @@ const Form = () => {
             <label>
                 Enter your username:
                 <input 
-                    type="username" 
+                    type="text" 
                     name="username" 
                     value={username}
-                    onChange={handleChange}
+                    onChange={handleUsername}
+                />
+            </label>
+            <br />
+            <label>
+                Enter your password:
+                <input 
+                    type="password" 
+                    name="password"
+                    value={password}
+                    onChange={handlePassword}
                 />
             </label>
             <br />
