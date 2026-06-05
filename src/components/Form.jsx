@@ -1,37 +1,26 @@
 import { useState } from "react"
 
 const Form = () => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    // const [username, setUsername] = useState("");
+    // const [password, setPassword] = useState("");
+
+    const [loginInfo, setLoginInfo] = useState({username: "", password: ""});
 
     const handleInput = (event) => {
         const inputEl = event.target
-        inputEl.name === "username" ? setUsername(inputEl.value) : setPassword(inputEl.value);
+        setLoginInfo({...loginInfo, [inputEl.name] : inputEl.value});
     }
-
-    // const handleUsername = (event) => {
-    //     const inputEl = event.target;
-    //     console.log("username", inputEl);
-    //     setUsername(inputEl.value);
-    // };
-    
-    // const handlePassword = (event) => {
-    //     const inputEl = event.target;
-    //     console.log("password", inputEl)
-    //     setPassword(inputEl.value);
-    // };
 
     const handleSubmit = (event) => {
         event.preventDefault();
         fetch("http://url.com/endpoint", {
             method: "POST",
             body: JSON.stringify({
-                username: username,
-                password: password
+                username: loginInfo.username,
+                password: loginInfo.password
             })
         });
-        setUsername("");
-        setPassword("");
+        setLoginInfo({username: "", password: ""})
     };
 
     return (
@@ -41,7 +30,7 @@ const Form = () => {
                 <input 
                     type="text" 
                     name="username" 
-                    value={username}
+                    value={loginInfo.username}
                     onChange={handleInput}
                 />
             </label>
@@ -51,7 +40,7 @@ const Form = () => {
                 <input 
                     type="password" 
                     name="password"
-                    value={password}
+                    value={loginInfo.password}
                     onChange={handleInput}
                 />
             </label>
