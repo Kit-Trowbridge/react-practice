@@ -1,14 +1,22 @@
 import { useState } from "react"
 
 const Form = () => {
-    const [loginInfo, setLoginInfo] = useState({username: "", email: "", password: ""});
+    const [loginInfo, setLoginInfo] = useState({username: "", password: "", phoneNumber: ""});
 
     const handleInput = (event) => {
         const inputEl = event.target
 
-        setLoginInfo({...loginInfo, [inputEl.name] : inputEl.value});
-    }
-
+        if (inputEl.name === "phoneNumber") {
+            const phoneNumberArr = inputEl.value.split("")
+            let filteredPhoneNumber = phoneNumberArr.filter((letter) => {
+                return !isNaN(letter)
+            })
+            filteredPhoneNumber = filteredPhoneNumber.join("")
+            setLoginInfo({...loginInfo, "phoneNumber" : filteredPhoneNumber});
+        } else {
+            setLoginInfo({...loginInfo, [inputEl.name] : inputEl.value});
+        }
+    }    
 
     const handleSubmit = (event) => {
         event.preventDefault(); 
@@ -16,7 +24,7 @@ const Form = () => {
             method: "POST",
             body: JSON.stringify(loginInfo)
         });
-        setLoginInfo({username: "", email: "", password: ""})
+        setLoginInfo({username: "", password: "", phoneNumber: ""})
     };
 
     return (
@@ -33,23 +41,23 @@ const Form = () => {
             </label>
             <br />
             <label>
-                Enter your email:
-                <br />
-                <input 
-                    type="text"
-                    name="email"
-                    value={loginInfo.email}
-                    onChange={handleInput}
-                />
-            </label>
-            <br />
-            <label>
                 Enter your password:
                 <br />
                 <input 
                     type="password" 
                     name="password"
                     value={loginInfo.password}
+                    onChange={handleInput}
+                />
+            </label>
+            <br />
+            <label>
+                Enter your phone number:
+                <br />
+                <input 
+                    type="text"
+                    name="phoneNumber"
+                    value={loginInfo.phoneNumber}
                     onChange={handleInput}
                 />
             </label>
@@ -62,4 +70,4 @@ const Form = () => {
     )
 }
 
-export default Form
+export default Form;
