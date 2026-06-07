@@ -1,27 +1,30 @@
 import { useState } from "react"
 
 const Form = () => {
-    // adding username and password as properties in the state, stored in a dictionary under the name loginInfo
-    // setLoginInfo is the name of the function that will update the state
-    // these names have been assigned through destructuring useState
-    // the starting state for both is an empty string
+    // adding username and password as properties in the state, stored in an object under the name loginInfo
+    // setLoginInfo is the name of the function that will update these values in the state
+    // the names loginInfo and setLoginInfo have been assigned through destructuring useState
+    // the starting state for both username and password is an empty string
     const [loginInfo, setLoginInfo] = useState({username: "", password: ""});
 
     // when the input is updated (typed into)
     const handleInput = (event) => {
-        // setting inputEl to the the specific input element that is being typed into
-        // event is an object that target is one of the keys / properties of
+        // setting inputEl to be the specific input element that is being typed into
+        // (event is an object and target is one of its keys / properties)
         // the target looks like this: <input type="text" name="username" value="whatever has just been typed"> 
         const inputEl = event.target
-        // calling the function that will update the state (setLoginInfo)
-        // we are creating a new loginInfo object so that useState will be triggered and re-render the ___ ??
-        // using spread syntax to copy over the existing key / values in loginInfo
-        // and if there is new input on at least one of the two properties, set them to that value of that input
+
+        // we are creating a new loginInfo object from the input, triggering useState to re-render the form component
+        // it compares this new render to its last render (all in the virtual DOM)
+        // if there is a change between the two, it will update the actual form in the DOM with these new properties
+
+        // using spread syntax to copy all current values from loginInfo (whatever was last typed in either field)
+        // and overwrite the key matching inputEl.name with the new inputEl.value
+
         // this syntax enables either username or password to be set in the same way
         // it determines which key to update based on the name property of the input object (<input type="text" name="username" value="whatever has just been typed"> )
         // it would look like either ["username"]: "whatever has just been typed" or ["password"]: whatever has just been typed
-        // if they are both new values, it will set them both; otherwise it will use the existing username or password in the current loginInfo
-        // Q: will that existing loginInfo always be the starting state (empty both)??
+
         setLoginInfo({...loginInfo, [inputEl.name] : inputEl.value});
     }
 
@@ -31,9 +34,11 @@ const Form = () => {
         event.preventDefault(); // {defaultPrevented: true} is part of the event object now 
         fetch("http://url.com/endpoint", {
             method: "POST",
-            // have to convert the 
+            // have to convert the loginInfo object -- {username: "typedusername", password: "typed password"}
+            // to a JSON-formatted string -- '{"username": "typedusername", "password": "typed password"}'
             body: JSON.stringify(loginInfo)
-            // because we set loginInfo to an object already, don't need to wrap it in {} like we would if sending individual properties in the body
+            // body content should be formatted as an object to make it easy to convert to a JSON-formatted string
+            // loginInfo is already an object because of how we setup the state
         });
         // resetting the loginInfo to blank values for both --> clearing the form
         setLoginInfo({username: "", password: ""})
@@ -46,7 +51,7 @@ const Form = () => {
                 <input 
                     type="text" 
                     name="username" 
-                    value={loginInfo.username}
+                    value={loginInfo.username} // dynamic value which we use in handleInput to update the loginInfo
                     onChange={handleInput}
                 />
             </label>
