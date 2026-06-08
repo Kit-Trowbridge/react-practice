@@ -2,6 +2,7 @@ import { useState } from "react"
 
 const Form = () => {
     const [loginInfo, setLoginInfo] = useState({username: "", password: "", phoneNumber: ""});
+    const [submissionAttempted, setSubmissionAttempted] = useState(false)
 
     const handleInput = (event) => {
         const inputEl = event.target;
@@ -17,8 +18,9 @@ const Form = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault(); 
-        
+
         if (loginInfo.password.length < 8) {
+            setSubmissionAttempted(true);
             return;
         }
         
@@ -27,6 +29,7 @@ const Form = () => {
             body: JSON.stringify(loginInfo)
         });
         setLoginInfo({username: "", password: "", phoneNumber: ""});
+        setSubmissionAttempted(false); // so that the password error <p> stops being rendered
     };
 
     return (
@@ -68,6 +71,8 @@ const Form = () => {
                 type="submit" 
                 name="submit"
             />
+            <br />
+            {submissionAttempted && loginInfo.password.length < 8 && <p>Password must be at least 8 characters</p>}
         </form>
     )
 }
