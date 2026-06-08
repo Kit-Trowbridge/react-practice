@@ -7,11 +7,9 @@ const Form = () => {
         const inputEl = event.target
 
         if (inputEl.name === "phoneNumber") {
-            const phoneNumberArr = inputEl.value.split("")
-            let filteredPhoneNumber = phoneNumberArr.filter((letter) => {
-                return !isNaN(letter)
-            })
-            filteredPhoneNumber = filteredPhoneNumber.join("")
+            const filteredPhoneNumber = inputEl.value.split("")
+                .filter(letter => !isNaN(letter))
+                .join("")
             setLoginInfo({...loginInfo, "phoneNumber" : filteredPhoneNumber});
         } else {
             setLoginInfo({...loginInfo, [inputEl.name] : inputEl.value});
