@@ -5,15 +5,14 @@ const Form = () => {
 
     const handleInput = (event) => {
         const inputEl = event.target
+        let inputValue = inputEl.value
 
         if (inputEl.name === "phoneNumber") {
-            const filteredPhoneNumber = inputEl.value.split("")
+            inputValue = inputEl.value.split("")
                 .filter(letter => !isNaN(letter))
                 .join("")
-            setLoginInfo({...loginInfo, "phoneNumber" : filteredPhoneNumber});
-        } else {
-            setLoginInfo({...loginInfo, [inputEl.name] : inputEl.value});
-        }
+        } 
+        setLoginInfo({...loginInfo, [inputEl.name] : inputValue});
     }    
 
     const handleSubmit = (event) => {
