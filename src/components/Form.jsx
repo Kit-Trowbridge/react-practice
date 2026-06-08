@@ -4,24 +4,29 @@ const Form = () => {
     const [loginInfo, setLoginInfo] = useState({username: "", password: "", phoneNumber: ""});
 
     const handleInput = (event) => {
-        const inputEl = event.target
-        let inputValue = inputEl.value
+        const inputEl = event.target;
+        let inputValue = inputEl.value;
 
         if (inputEl.name === "phoneNumber") {
             inputValue = inputEl.value.split("")
-                .filter(letter => !isNaN(letter))
-                .join("")
+                .filter(letter => !isNaN(letter.trim()))
+                .join("");
         } 
         setLoginInfo({...loginInfo, [inputEl.name] : inputValue});
     }    
 
     const handleSubmit = (event) => {
         event.preventDefault(); 
+        
+        if (loginInfo.password.length < 8) {
+            return;
+        }
+        
         fetch("http://url.com/endpoint", {
             method: "POST",
             body: JSON.stringify(loginInfo)
         });
-        setLoginInfo({username: "", password: "", phoneNumber: ""})
+        setLoginInfo({username: "", password: "", phoneNumber: ""});
     };
 
     return (
